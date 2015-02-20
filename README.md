@@ -2,7 +2,9 @@
 Third party Instagram Sdk which provides a simple login button like facebook or twitter, and Handles the oauth2 flow for users to login and authenticate your app.  The access token is stored in an Instagram session which persists upon closing the app.
 
 ### Adding the Sdk to your project
-Maven support coming soon.
+Add the library as a dependency to your project. When using Android Studio and Gradle it's as easy as adding this dependency:
+
+        compile 'com.mrunia.instagram.sdk:app:1.0.0'
 
 ### Using the Sdk
 Add the button to your xml layout file...
