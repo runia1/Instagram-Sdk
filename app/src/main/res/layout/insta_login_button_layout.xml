@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:clickable="true"
+    android:background="@drawable/insta_login_btn_states"
+    android:id="@+id/insta_login_button">
+
+    <ImageView
+        android:id="@+id/insta_login_button_image"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/insta_button_image_states"
+        android:scaleType="fitXY"/>
+    <TextView
+        android:id="@+id/insta_login_button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/insta_login_button_image"
+        android:text="Log in with Instagram"
+        android:textColor="@color/insta_button_text_color_states"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>
