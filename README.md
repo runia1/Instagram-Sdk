@@ -65,7 +65,7 @@ You can now use the Instagram AccessToken throughout your app to make Instagram 
         
 ### ScreenShots 
 
-![Alt text](https://cloud.githubusercontent.com/assets/6709518/6282314/e633723e-b887-11e4-8e27-aede6aa00466.png)
-![Alt text](https://cloud.githubusercontent.com/assets/6709518/6282312/e0d29d92-b887-11e4-8d9b-2db01f11ce1b.png)
-![Alt text](https://cloud.githubusercontent.com/assets/6709518/6282313/e4263288-b887-11e4-898a-3d5c9e442f4b.png)
-![alt tag](https://cloud.githubusercontent.com/assets/6709518/6282310/dc960714-b887-11e4-95d4-99562842a0dd.png)
+<img width="350px" height="600px" src="https://cloud.githubusercontent.com/assets/6709518/6282314/e633723e-b887-11e4-8e27-aede6aa00466.png"/>
+<img width="350px" height="600px" src="https://cloud.githubusercontent.com/assets/6709518/6282312/e0d29d92-b887-11e4-8d9b-2db01f11ce1b.png"/>
+<img width="350px" height="600px" src="https://cloud.githubusercontent.com/assets/6709518/6282313/e4263288-b887-11e4-898a-3d5c9e442f4b.png"/>
+<img width="350px" height="600px" src="https://cloud.githubusercontent.com/assets/6709518/6282310/dc960714-b887-11e4-95d4-99562842a0dd.png"/>
