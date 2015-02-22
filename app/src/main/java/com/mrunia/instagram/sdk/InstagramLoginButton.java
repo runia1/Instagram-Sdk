@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
@@ -96,53 +98,56 @@ public class InstagramLoginButton extends RelativeLayout implements View.OnClick
             t.setText("Log in to Instagram");
             callback.logout();
         } else {
-            //attempt to login
-            //disable the button till at least the authDialog is displayed.
-            setButtonEnabled(false);
-            authDialog = new Dialog(c);
-            authDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            authDialog.setContentView(R.layout.insta_auth_dialog);
-            authDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    //if the user hits the back button or clicks outside the dialog, closing it...
-                    //simply re-enable the button.
-                    setButtonEnabled(true);
-                }
-            });
-            //make sure the webview clears any saved cookies before it displays so that login screen will appear.
-            CookieManager cookieManager = CookieManager.getInstance();
-            cookieManager.removeAllCookie();
-
-            WebView login = (WebView)authDialog.findViewById(R.id.insta_login_webview);
-            login.setVerticalScrollBarEnabled(false);
-            login.setHorizontalScrollBarEnabled(false);
-            login.setWebViewClient(new WebViewClient() {
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    //if this page is from your callback url, grab the code=CODE and close the webview.
-                    if (url.startsWith(callbackUrl)) {
-                        Log.i(TAG, "RESPOSE FROM AUTH SERVER: " + url);
-                        if(url.contains("code=")) {
-                            Uri uri = Uri.parse(url);
-                            response_code = uri.getQueryParameter("code");
-                            new FetchToken().execute();
-                        } else if(url.contains("error=")) {
-                            Uri uri = Uri.parse(url);
-                            String error = uri.getQueryParameter("error_description");
-                            Toast.makeText(c, "Cannot get AccessToken: "+error, Toast.LENGTH_LONG).show();
-                        }
-                        authDialog.dismiss();
-                        return true;
+            //if there is an internet connection go ahead.
+            if(isConnected()) {
+                //attempt to login
+                //disable the button till at least the authDialog is displayed.
+                setButtonEnabled(false);
+                authDialog = new Dialog(c);
+                authDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                authDialog.setContentView(R.layout.insta_auth_dialog);
+                authDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        //if the user hits the back button or clicks outside the dialog, closing it...
+                        //simply re-enable the button.
+                        setButtonEnabled(true);
                     }
-                    //Allow this page to load if it's not from your callback url.
-                    //Which means it should be one of the instagram auth pages.
-                    return false;
-                }
-            });
-            login.getSettings().setJavaScriptEnabled(true);
-            login.loadUrl(authUrlString);
-            authDialog.show();
+                });
+                //make sure the webview clears any saved cookies before it displays so that login screen will appear.
+                CookieManager cookieManager = CookieManager.getInstance();
+                cookieManager.removeAllCookie();
+
+                WebView login = (WebView) authDialog.findViewById(R.id.insta_login_webview);
+                login.setVerticalScrollBarEnabled(false);
+                login.setHorizontalScrollBarEnabled(false);
+                login.setWebViewClient(new WebViewClient() {
+                    @Override
+                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                        //if this page is from your callback url, grab the code=CODE and close the webview.
+                        if (url.startsWith(callbackUrl)) {
+                            Log.i(TAG, "RESPOSE FROM AUTH SERVER: " + url);
+                            if (url.contains("code=")) {
+                                Uri uri = Uri.parse(url);
+                                response_code = uri.getQueryParameter("code");
+                                new FetchToken().execute();
+                            } else if (url.contains("error=")) {
+                                Uri uri = Uri.parse(url);
+                                String error = uri.getQueryParameter("error_description");
+                                Toast.makeText(c, "Cannot get AccessToken: " + error, Toast.LENGTH_LONG).show();
+                            }
+                            authDialog.dismiss();
+                            return true;
+                        }
+                        //Allow this page to load if it's not from your callback url.
+                        //Which means it should be one of the instagram auth pages.
+                        return false;
+                    }
+                });
+                login.getSettings().setJavaScriptEnabled(true);
+                login.loadUrl(authUrlString);
+                authDialog.show();
+            }
         }
     }
 
@@ -162,8 +167,13 @@ public class InstagramLoginButton extends RelativeLayout implements View.OnClick
         this.callback = callback;
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+    private boolean isConnected() {
+        NetworkInfo networkInfo = ((ConnectivityManager) c.getSystemService(c.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
+        }
+        Toast.makeText(c, "No internet connection at this time.", Toast.LENGTH_LONG).show();
+        return false;
     }
 
     public class FetchToken extends AsyncTask<String, Void, Boolean> {
