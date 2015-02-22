@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Instagram-Sdk.iml" filepath="$PROJECT_DIR$/Instagram-Sdk.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/instagram.sdk/app.iml" filepath="$PROJECT_DIR$/instagram.sdk/app.iml" />
     </modules>
   </component>
 </project>
