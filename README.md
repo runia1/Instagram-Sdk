@@ -4,7 +4,7 @@ Third party Instagram Sdk which provides a simple login button like facebook or 
 ### Adding the Sdk to your project
 Add the library as a dependency to your project. When using Android Studio and Gradle it's as easy as adding this dependency:
 
-        compile 'com.mrunia.instagram.sdk:instagram.sdk:1.0.0'
+        compile 'com.mrunia.instagram.sdk:instagram.sdk:1.1.0'
 
 ### Using the Sdk
 Add the button to your xml layout file...
@@ -22,7 +22,8 @@ Add your ClientID, ClientSecret, and CallbackUrl Globals...
         String INSTA_CLIENT_ID = "your client id";
         String INSTA_CLIENT_SECRET = "your client secret";
         String INSTA_CALLBACK_URL = "your callback url - http://example.com";
-        InstagramAuthConfig instaAuthConfig = new InstagramAuthConfig(INSTA_CLIENT_ID, INSTA_CLIENT_SECRET, INSTA_CALLBACK_URL);
+        String[] INSTA_SCOPES = {"relationships", "likes", "comments"}; // or whatever your scopes are.
+        InstagramAuthConfig instaAuthConfig = new InstagramAuthConfig(INSTA_CLIENT_ID, INSTA_CLIENT_SECRET, INSTA_CALLBACK_URL, INSTA_SCOPES);
         Instagram.getInstance().with(this, instaAuthConfig);
         
 Grab the button from your layout and set the callback...

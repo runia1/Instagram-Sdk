@@ -7,7 +7,7 @@ import android.os.Bundle;
  */
 public class InstagramAuthConfig {
     private static String clientId, clientSecret, callbackUrl;
-    private static String scopes[];
+    private static String[] scopes;
 
     public InstagramAuthConfig() { }
     public InstagramAuthConfig(String clientId, String clientSecret, String callbackUrl, String[] scopes) {
