@@ -4,7 +4,7 @@ Third party Instagram Sdk which provides a simple login button like facebook or 
 ### Adding the Sdk to your project
 Add the library as a dependency to your project. When using Android Studio and Gradle it's as easy as adding this dependency:
 
-        compile 'com.mrunia.instagram.sdk:instagram.sdk:1.1.1'
+        compile 'com.mrunia.instagram.sdk:instagram.sdk:1.1.5'
 
 ### Using the Sdk
 Add the button to your xml layout file...
