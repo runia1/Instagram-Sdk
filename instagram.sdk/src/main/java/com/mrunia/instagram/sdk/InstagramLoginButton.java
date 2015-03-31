@@ -40,10 +40,10 @@ public class InstagramLoginButton extends RelativeLayout implements View.OnClick
 
     private static final String AUTHURL = "https://api.instagram.com/oauth/authorize/";
     private static final String TOKENURL = "https://api.instagram.com/oauth/access_token";
-    private static final String APIURL = "https://api.instagram.com/v1";
     private String callbackUrl, clientId, clientSecret;
+    private String[] scopes;
 
-    private String authUrlString, tokenUrlString;
+    private String authUrlString;
     private String response_code;
 
     private Context c;
@@ -85,8 +85,20 @@ public class InstagramLoginButton extends RelativeLayout implements View.OnClick
         clientId = authConfig.getClientId();
         clientSecret = authConfig.getClientSecret();
         callbackUrl = authConfig.getCallbackUrl();
+        scopes = authConfig.getScopes();
 
-        authUrlString = AUTHURL + "?client_id=" + clientId + "&redirect_uri=" + callbackUrl + "&response_type=code&display=touch&scope=likes+relationships";
+        authUrlString = AUTHURL +
+                "?client_id=" + clientId +
+                "&redirect_uri=" + callbackUrl +
+                "&response_type=code" +
+                "&display=touch" +
+                "&scope=";
+        // add the scopes
+        for(int i=0; i<scopes.length; i++) {
+            if(i+1 == scopes.length) authUrlString += scopes[i];
+            else                     authUrlString += scopes[i] + "+"; // add a plus in between unless it's the last one.
+        }
+        Log.i(TAG, "AuthUrlString: "+authUrlString);
     }
 
     @Override

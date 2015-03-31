@@ -7,12 +7,14 @@ import android.os.Bundle;
  */
 public class InstagramAuthConfig {
     private static String clientId, clientSecret, callbackUrl;
+    private static String scopes[];
 
     public InstagramAuthConfig() { }
-    public InstagramAuthConfig(String clientId, String clientSecret, String callbackUrl) {
+    public InstagramAuthConfig(String clientId, String clientSecret, String callbackUrl, String[] scopes) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.callbackUrl = callbackUrl;
+        this.scopes = scopes;
     }
 
     public void setClientId(String c) {
@@ -27,6 +29,10 @@ public class InstagramAuthConfig {
         callbackUrl = c;
     }
 
+    public void setScopes(String[] c) {
+        scopes = c;
+    }
+
     public String getClientId() {
         return clientId;
     }
@@ -37,5 +43,9 @@ public class InstagramAuthConfig {
 
     public String getCallbackUrl() {
         return callbackUrl;
+    }
+
+    public String[] getScopes() {
+        return scopes;
     }
 }
